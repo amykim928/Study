@@ -324,3 +324,105 @@ count = countBiggerThanTen2([1, 2, 3, 5, 10, 20, 30, 40, 50, 60]);
 console.log(count);
 count = countBiggerThanTen3([1, 2, 3, 5, 10, 20, 30, 40, 50, 60]);
 console.log(count);
+
+//프로토타입과 클래스
+function Animal(type, name, sound){
+  this.type = type;
+  this.name = name;
+  this.sound = sound;
+  // this.say = function(){
+  //   console.log(this.sound);
+  // }
+}
+
+Animal.prototype.say = function(){
+  console.log(this.sound);
+}
+Animal.prototype.sharedValue = 1
+//.prototype.[원하는키] =
+
+
+const dogs = new Animal('개', '멍멍이', '멍멍');
+const cats = new Animal('고양이', '야옹이', '야옹');
+
+dogs.say()
+cats.say()
+
+console.log(dogs.sharedValue);
+console.log(cats.sharedValue);
+
+function Dog(name, sound){
+  Animal.call(this, '개', name, sound);
+}
+Dog.prototype = Animal.prototype;
+
+function Cat(name, sound) {
+  Animal.call(this, '고양이', name, sound);
+}
+Cat.prototype = Animal.prototype;
+
+const dogs2 = new Dog('멍멍이', '멍멍');
+const cats2 = new Cat('야옹이', '야옹');
+
+dogs2.say();
+cats2.say();
+
+class Animals {
+  constructor(type, name, sound) {
+    this.type = type;
+    this.name = name;
+    this.sound = sound;
+  }
+  say() {
+    console.log(this.sound);
+  } //자동으로 prototype으로 등록
+}
+
+class Dogs extends Animals {
+  constructor(name, sound){
+    super('개', name, sound);
+  }
+}
+
+class Cats extends Animals {
+  constructor(name, sound){
+    super('고양이', name, sound);
+  }
+}
+
+const dogs3 = new Animals('개', '멍멍이', '멍멍');
+const cats3 = new Animals('고양이', '야옹이', '야옹');
+
+dogs3.say();
+cats3.say();
+
+const dogs4 = new Dogs('멍멍이', '멍멍');
+const cats4 = new Cats('야옹이', '야옹');
+
+dogs4.say();
+cats4.say();
+
+class Food {
+  constructor(name) {
+    this.name = name
+    this.brands = [];
+  }
+  addBrand(brand){
+    this.brands.push(brand);
+  }
+  print(){
+    console.log(`${this.name}을/를 파는 음식점들:`);
+    console.log(this.brands.join(', '));
+  }
+}
+
+const pizza = new Food('피자');
+pizza.addBrand('피자헛');
+pizza.addBrand('도미노 피자');
+
+const chicken = new Food('치킨');
+chicken.addBrand('굽네치킨');
+chicken.addBrand('BBQ');
+
+pizza.print()
+chicken.print();
