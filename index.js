@@ -426,3 +426,52 @@ chicken.addBrand('BBQ');
 
 pizza.print()
 chicken.print();
+
+//삼항 연산자
+const array = [];
+// let text = "";
+// if (array.length === 0) {
+//   text = "배열이 비어있습니다.";
+// } else {
+//   text = "배열이 비어있지 않습니다.";
+// }
+let text = array.length === 0 
+ ? '배열이 비어있습니다.' 
+ : '배열이 비어있지 않습니다.';
+console.log(text);
+
+const condition1 = false;
+const condition2 = false;
+
+const conditionValue = condition1 ? '와우!'
+  : condition2 ? 'blabla' : 'foo';
+console.log(conditionValue);
+
+//Truthy and Falsy
+function printP(person) {
+//  if (person === undefined || person === null) {
+  if (!person) {
+    console.log('person이 없네요.')
+    return;
+  }
+  console.log(person.name);
+}
+
+// const person = {
+//   name: 'John'
+// };
+const person = null;
+printP(person);
+
+console.log(!3);
+console.log(!'hello');
+console.log(!['array?']);
+console.log(![]);
+console.log(!{ value: 1 });
+
+console.log(!undefined);
+console.log(!null);
+console.log(!0);
+console.log(!'');
+console.log(!NaN);
+//NaN: Not A Number 문자열을 숫자로 변환 시 발생
