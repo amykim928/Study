@@ -299,8 +299,8 @@ index: 현재 인덱스, array: 현재 처리 중인 배열 자신)
 */
 
 function countBiggerThanTen(numbers) {
-  let result = numbers.reduce( (accumulator, current) => {
-    if(current > 10) accumulator ++;
+  let result = numbers.reduce((accumulator, current) => {
+    if (current > 10) accumulator++;
     return accumulator;
   }, 0);
   return result;
@@ -308,14 +308,14 @@ function countBiggerThanTen(numbers) {
 
 function countBiggerThanTen2(numbers) {
   let result = 0;
-  numbers.forEach(n => {
-    if(n > 10) result++;
-  })
+  numbers.forEach((n) => {
+    if (n > 10) result++;
+  });
   return result;
 }
 
 function countBiggerThanTen3(numbers) {
-  return numbers.filter(n => n > 10).length;
+  return numbers.filter((n) => n > 10).length;
 }
 
 let count = countBiggerThanTen([1, 2, 3, 5, 10, 20, 30, 40, 50, 60]);
@@ -326,7 +326,7 @@ count = countBiggerThanTen3([1, 2, 3, 5, 10, 20, 30, 40, 50, 60]);
 console.log(count);
 
 //프로토타입과 클래스
-function Animal(type, name, sound){
+function Animal(type, name, sound) {
   this.type = type;
   this.name = name;
   this.sound = sound;
@@ -335,34 +335,33 @@ function Animal(type, name, sound){
   // }
 }
 
-Animal.prototype.say = function(){
+Animal.prototype.say = function () {
   console.log(this.sound);
-}
-Animal.prototype.sharedValue = 1
+};
+Animal.prototype.sharedValue = 1;
 //.prototype.[원하는키] =
 
+const dogs = new Animal("개", "멍멍이", "멍멍");
+const cats = new Animal("고양이", "야옹이", "야옹");
 
-const dogs = new Animal('개', '멍멍이', '멍멍');
-const cats = new Animal('고양이', '야옹이', '야옹');
-
-dogs.say()
-cats.say()
+dogs.say();
+cats.say();
 
 console.log(dogs.sharedValue);
 console.log(cats.sharedValue);
 
-function Dog(name, sound){
-  Animal.call(this, '개', name, sound);
+function Dog(name, sound) {
+  Animal.call(this, "개", name, sound);
 }
 Dog.prototype = Animal.prototype;
 
 function Cat(name, sound) {
-  Animal.call(this, '고양이', name, sound);
+  Animal.call(this, "고양이", name, sound);
 }
 Cat.prototype = Animal.prototype;
 
-const dogs2 = new Dog('멍멍이', '멍멍');
-const cats2 = new Cat('야옹이', '야옹');
+const dogs2 = new Dog("멍멍이", "멍멍");
+const cats2 = new Cat("야옹이", "야옹");
 
 dogs2.say();
 cats2.say();
@@ -379,52 +378,52 @@ class Animals {
 }
 
 class Dogs extends Animals {
-  constructor(name, sound){
-    super('개', name, sound);
+  constructor(name, sound) {
+    super("개", name, sound);
   }
 }
 
 class Cats extends Animals {
-  constructor(name, sound){
-    super('고양이', name, sound);
+  constructor(name, sound) {
+    super("고양이", name, sound);
   }
 }
 
-const dogs3 = new Animals('개', '멍멍이', '멍멍');
-const cats3 = new Animals('고양이', '야옹이', '야옹');
+const dogs3 = new Animals("개", "멍멍이", "멍멍");
+const cats3 = new Animals("고양이", "야옹이", "야옹");
 
 dogs3.say();
 cats3.say();
 
-const dogs4 = new Dogs('멍멍이', '멍멍');
-const cats4 = new Cats('야옹이', '야옹');
+const dogs4 = new Dogs("멍멍이", "멍멍");
+const cats4 = new Cats("야옹이", "야옹");
 
 dogs4.say();
 cats4.say();
 
 class Food {
   constructor(name) {
-    this.name = name
+    this.name = name;
     this.brands = [];
   }
-  addBrand(brand){
+  addBrand(brand) {
     this.brands.push(brand);
   }
-  print(){
+  print() {
     console.log(`${this.name}을/를 파는 음식점들:`);
-    console.log(this.brands.join(', '));
+    console.log(this.brands.join(", "));
   }
 }
 
-const pizza = new Food('피자');
-pizza.addBrand('피자헛');
-pizza.addBrand('도미노 피자');
+const pizza = new Food("피자");
+pizza.addBrand("피자헛");
+pizza.addBrand("도미노 피자");
 
-const chicken = new Food('치킨');
-chicken.addBrand('굽네치킨');
-chicken.addBrand('BBQ');
+const chicken = new Food("치킨");
+chicken.addBrand("굽네치킨");
+chicken.addBrand("BBQ");
 
-pizza.print()
+pizza.print();
 chicken.print();
 
 //삼항 연산자
@@ -435,23 +434,21 @@ const array = [];
 // } else {
 //   text = "배열이 비어있지 않습니다.";
 // }
-let text = array.length === 0 
- ? '배열이 비어있습니다.' 
- : '배열이 비어있지 않습니다.';
+let text =
+  array.length === 0 ? "배열이 비어있습니다." : "배열이 비어있지 않습니다.";
 console.log(text);
 
 const condition1 = false;
 const condition2 = false;
 
-const conditionValue = condition1 ? '와우!'
-  : condition2 ? 'blabla' : 'foo';
+const conditionValue = condition1 ? "와우!" : condition2 ? "blabla" : "foo";
 console.log(conditionValue);
 
 //Truthy and Falsy
 function printP(person) {
-//  if (person === undefined || person === null) {
+  //  if (person === undefined || person === null) {
   if (!person) {
-    console.log('person이 없네요.')
+    console.log("person이 없네요.");
     return;
   }
   console.log(person.name);
@@ -464,14 +461,140 @@ const person = null;
 printP(person);
 
 console.log(!3);
-console.log(!'hello');
-console.log(!['array?']);
+console.log(!"hello");
+console.log(!["array?"]);
 console.log(![]);
 console.log(!{ value: 1 });
 
 console.log(!undefined);
 console.log(!null);
 console.log(!0);
-console.log(!'');
+console.log(!"");
 console.log(!NaN);
 //NaN: Not A Number 문자열을 숫자로 변환 시 발생
+
+//단축 평가 (short-circuit evauluation) 논리 계산법
+const mong = {
+  name: "멍멍이"
+};
+
+function getName(animal) {
+  // if(animal){
+  //   return animal.name;
+  // } //객체가 있을 때
+  // return undefined;
+  return animal && animal.name;
+}
+
+const name = getName(mong);
+console.log(name);
+/* A && B : A가 Truthy한 값이면 B가 결과값
+A가 Falsy한 값이면 A가 결과값 */
+const name2 = getName();
+console.log(name2);
+
+console.log(true && "hello"); // hello
+console.log(false && "hello"); // false
+console.log("hello" && "bye"); // bye
+console.log(null && "hello"); // null
+console.log(undefined && "hello"); // undefined
+console.log("" && "hello"); // ''
+console.log(0 && "hello"); // 0
+console.log(1 && "hello"); // hello
+console.log(1 && 1); // 1
+
+const namelessDog = {
+  name: ""
+};
+
+function getName2(animal) {
+  const name = animal && animal.name;
+  // if(!name){
+  //   return '이름이 없는 동물입니다.';
+  // }
+  // return name;
+  return name || "이름이 없는 동물입니다";
+}
+
+const nameless = getName2(namelessDog);
+console.log(nameless);
+/* A || B : A가 Truthy할 경우 결과는 A
+A가 Falsy할 경우 결과는 B */
+
+console.log(true || "hello"); // true
+console.log(false || "hello"); // hello
+console.log("hello" || "bye"); // hello
+console.log(null || "hello"); // hello
+console.log(undefined || "hello"); // hello
+console.log("" || "hello"); // hello
+console.log(0 || 0); // 0
+console.log(1 || "hello"); // 1
+console.log(1 || 1); // 1
+
+//함수의 기본 파라미터
+function calculateCircleArea(r = 1) {
+  //const radius = r || 1; //r 값이 없을 경우 기본값
+  return Math.PI * r * r;
+}
+const area = calculateCircleArea(4);
+console.log(area);
+
+const calculateCircle = (r = 1) => Math.PI * r * r;
+const area2 = calculateCircle();
+console.log(area2);
+
+//조건문 심화
+function isAnimal(text) {
+  // return (
+  //   text === '고양이' || text === '개' || text === '거북이' || text === '너구리'
+  // );
+  const animals = ["고양이", "개", "거북이", "너구리"];
+  return animals.includes(text);
+}
+console.log(isAnimal("개")); // true
+console.log(isAnimal("노트북")); // false
+
+const isAni = (name) => ["고양이", "개", "거북이", "너구리"].includes(name);
+
+console.log(isAni("개")); // true
+console.log(isAni("노트북")); // false
+
+function getSound(animal) {
+  // if (animal === '개') return '멍멍!';
+  // if (animal === '고양이') return '야옹~';
+  // if (animal === '참새') return '짹짹';
+  // if (animal === '비둘기') return '구구 구 구';
+  // return '...?';
+  const sounds = {
+    개: "멍멍!",
+    고양이: "야옹~",
+    참새: "짹짹",
+    비둘기: "구구 구 구"
+  };
+  return sounds[animal] || "...?";
+}
+
+console.log(getSound("개")); // 멍멍!
+console.log(getSound("비둘기")); // 구구 구 구
+
+function makeSound(animal) {
+  const tasks = {
+    개() {
+      console.log("멍멍!");
+    },
+    고양이() {
+      console.log("고양이");
+    },
+    비둘기() {
+      console.log("구구 구 구");
+    }
+  };
+  if (!tasks[animal]) {
+    console.log("...?");
+    return;
+  }
+  tasks[animal]();
+}
+
+makeSound("고양이");
+makeSound("노트북");
