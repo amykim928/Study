@@ -598,3 +598,134 @@ function makeSound(animal) {
 
 makeSound("고양이");
 makeSound("노트북");
+
+//비구조화 할당 (구조분해) 문법
+const object = { aa: 1,};
+const { aa, bb = 2 } = object;
+console.log(aa);
+console.log(bb);
+
+const object2 = { aaa: 1};
+function printab({aaa, bbb = 2}){
+  console.log(aaa);
+  console.log(bbb);
+}
+printab(object2); //값이 없으면 undefined
+
+const an = {
+  name: '멍멍이',
+  type: '개'
+};
+
+const nickname = an.name;
+console.log(nickname);
+const { name: nickname2 } = an;
+console.log(nickname2);
+
+const arry = [1];
+const [one, two = 2] = arry;
+
+console.log(one);
+console.log(two);
+
+const deepObject = {
+  state: {
+    information: {
+      namename: 'velopert',
+      languages: ['korean', 'english', 'chinese']
+    }
+  },
+  deepValue: 5
+};
+
+// const { namename, languages } = deepObject.state.information;
+// const { deepValue } = deepObject;
+
+// const extracted = {
+//   namename, //namename: namename과 동일
+//   languages,
+//   deepValue
+// };
+// console.log(extracted);
+
+const {
+  state: {
+    information: {namename, languages}
+  },
+  deepValue
+} = deepObject;
+
+const extracted = {
+  namename,
+  languages,
+  deepValue
+};
+
+console.log(extracted);
+
+//spread와 rest
+const slime = {
+  name: '슬라임'
+};
+
+const cuteSlime = {
+  ...slime, 
+  attribute: 'cute'
+};
+
+const purpleCuteSlime = {
+  ...cuteSlime,
+  color: 'purple'
+};
+//기존의 것을 건드리지 않고, 새로운 객체 생성
+
+console.log(slime);
+console.log(cuteSlime);
+console.log(purpleCuteSlime);
+
+const animalArr = ['개', '고양이', '참새'];
+const anotherAnimals = [...animalArr, '비둘기', ...animalArr];
+console.log(animalArr)
+console.log(anotherAnimals)
+
+const { color, ...rest } = purpleCuteSlime;
+console.log(color);
+console.log(rest); //rest는 나머지 값
+
+const { attribute, ...sslime } = cuteSlime;
+console.log(attribute)
+console.log(sslime);
+
+const numberss = [0, 1, 2, 3, 4, 5, 6];
+const [ first, ...other] = numberss;
+console.log(first);
+console.log(other);
+
+// function sumRest(a, b, c, d, e, f, g) {
+//   let sum = 0;
+//   if (a) sum += a;
+//   if (b) sum += b;
+//   if (c) sum += c;
+//   if (d) sum += d;
+//   if (e) sum += e;
+//   if (f) sum += f;
+//   if (g) sum += g;
+//   //undefined이 값으로 들어오면 NaN이 되는 걸 방지
+//   return sum;
+// } -> 훨씬 더 간단한 방법으로
+function sumRest(...rest){
+  return rest.reduce((acc, current) => acc += current, 0);
+}
+
+const result = sumRest(...numberss);
+console.log(result);
+
+function max(...numbers) {
+  return numbers.reduce(
+    (acc, current) => (current > acc ? current : acc),
+    numbers[0]
+  );
+}
+
+const rresult = max(1, 2, 3, 4, 10, 5, 6, 7);
+console.log(rresult);
