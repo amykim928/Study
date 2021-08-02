@@ -729,3 +729,64 @@ function max(...numbers) {
 
 const rresult = max(1, 2, 3, 4, 10, 5, 6, 7);
 console.log(rresult);
+
+/*비동기 처리: 특정 코드의 연산이 끝날 때까지 코드의 실행을
+멈추지 않고 다음 코드를 먼저 실행*/
+// console.log('Hello');
+// setTimeout(function() {
+// 	console.log('Bye');
+// }, 3000);
+// console.log('Hello Again');
+//hello -> hello again -> 3초 후 bye 출력
+
+//promise
+// function increaseAndPrint(n, callback) {
+//   setTimeout(() => {
+//     const increased = n + 1;
+//     console.log(increased);
+//     if (callback) {
+//       callback(increased);
+//     }
+//   }, 1000);
+
+// }
+//setTimeout(function(){}, delay);
+//clearTimeout(): setTimeout에서 반환한 숫자타입 값 해제
+
+// increaseAndPrint(0, n => {
+//   increaseAndPrint(n, n => {
+//     increaseAndPrint(n, n => {
+//       increaseAndPrint(n, n => {
+//         increaseAndPrint(n, n => {
+//           console.log('끝!');
+//         });
+//       });
+//     });
+//   });
+// });
+
+// const myPromise = new Promise((resolve, reject) => {
+//   setTimeout(() => {
+//     resolve(1);
+//   }, 1000);
+// });
+// //resolve를 호출할 때 특정 값을 파라미터로 넣으면,
+// //이 값은 작업이 끝나고 나서 사용할 수 있음 (.then을 붙여서)
+
+// myPromise.then(n => {
+//   console.log(n);
+// });
+
+const myPromise = new Promise((resolve, reject) => {
+   setTimeout(() => {
+     reject(new Error()); //실패하는 상황에 사용
+   }, 1000);
+ });
+
+ myPromise
+   .then(n => {
+     console.log(n);
+   })
+   .catch(error => {
+     console.log(error); //실패했을 때 수행할 작업
+   });
