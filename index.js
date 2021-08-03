@@ -732,61 +732,171 @@ console.log(rresult);
 
 /*비동기 처리: 특정 코드의 연산이 끝날 때까지 코드의 실행을
 멈추지 않고 다음 코드를 먼저 실행*/
-// console.log('Hello');
-// setTimeout(function() {
-// 	console.log('Bye');
-// }, 3000);
-// console.log('Hello Again');
+console.log('Hello');
+setTimeout(function() {
+ 	console.log('Bye');
+ }, 3000);
+console.log('Hello Again');
 //hello -> hello again -> 3초 후 bye 출력
 
 //promise
-// function increaseAndPrint(n, callback) {
-//   setTimeout(() => {
-//     const increased = n + 1;
-//     console.log(increased);
-//     if (callback) {
-//       callback(increased);
-//     }
-//   }, 1000);
-
-// }
+function increaseAndPrint(n, callback) {
+   setTimeout(() => {
+     const increased = n + 1;
+     console.log(increased);
+     if (callback) {
+             callback(increased);
+     }
+   }, 1000);
+ }
 //setTimeout(function(){}, delay);
 //clearTimeout(): setTimeout에서 반환한 숫자타입 값 해제
 
-// increaseAndPrint(0, n => {
-//   increaseAndPrint(n, n => {
-//     increaseAndPrint(n, n => {
-//       increaseAndPrint(n, n => {
-//         increaseAndPrint(n, n => {
-//           console.log('끝!');
-//         });
-//       });
-//     });
-//   });
-// });
+//callback과 return의 차이: callback을 사용하면 결과값을
+//이용해 해야할 작업까지 함수 내부에서 수행할 수 있음
+//return은 결과값을 리턴하고 함수 외부에서 결과값을 이용해야 함
 
-// const myPromise = new Promise((resolve, reject) => {
-//   setTimeout(() => {
-//     resolve(1);
-//   }, 1000);
-// });
-// //resolve를 호출할 때 특정 값을 파라미터로 넣으면,
-// //이 값은 작업이 끝나고 나서 사용할 수 있음 (.then을 붙여서)
-
-// myPromise.then(n => {
-//   console.log(n);
-// });
+increaseAndPrint(0, n => {
+   increaseAndPrint(n, n => {
+     increaseAndPrint(n, n => {
+       increaseAndPrint(n, n => {
+       increaseAndPrint(n, n => {
+          console.log('끝!');
+         });
+       });
+     });
+   });
+ });
 
 const myPromise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve(1);
+  }, 1000);
+});
+//resolve를 호출할 때 특정 값을 파라미터로 넣으면,
+//이 값은 작업이 끝나고 나서 사용할 수 있음 (.then을 붙여서)
+
+myPromise.then(n => {
+  console.log(n);
+});
+
+const myPromise2 = new Promise((resolve, reject) => {
    setTimeout(() => {
      reject(new Error()); //실패하는 상황에 사용
    }, 1000);
  });
 
- myPromise
+ myPromise2
    .then(n => {
      console.log(n);
    })
    .catch(error => {
      console.log(error); //실패했을 때 수행할 작업
    });
+
+function increaseAndPrint2(n){
+  return new Promise((resolve, reject) => {
+    setTimeout(() =>  {
+      const value = n + 1;
+      if (value === 5) {
+        const error = new Error();
+        error.name = 'ValueIsFiveError';
+        reject(error);
+        return;
+      }
+      console.log(value);
+      resolve(value);
+    }, 1000);
+  });
+}
+
+increaseAndPrint2(3)
+.then((n) => {
+  console.log('result: ', n);
+})
+.catch(error => {
+  console.log('result: ', error.name);
+});
+increaseAndPrint2(0)
+.then(increaseAndPrint2)
+.then(increaseAndPrint2)
+.then(increaseAndPrint2)
+.then(increaseAndPrint2)
+.then(increaseAndPrint2)
+.catch(e => {
+  console.error(e);
+ });
+
+//async/await
+function sleep(ms){
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+//async를 사용하면, 해당 함수는 결과값으로 Promise를 반환
+async function process() {
+  console.log('안녕하세요!');
+  await sleep(1000);
+  console.log('반갑습니다!');
+}
+//Promise의 앞부분에 await을 넣어주면 해당 프로미스가
+//끝날 때까지 기다렸다가 다음 작업을 수행
+process().then(() => {
+  console.log('작업이 끝났어요');
+});
+
+async function makeError() {
+  await sleep(1000);
+  const error = new Error();
+  throw error;
+}
+
+async function process2() {
+  try {
+    await makeError();
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+process2();
+
+const getDog = async () => {
+  await sleep(1000);
+  return '멍멍이';
+};
+
+const getRabbit = async () => {
+  await sleep(500);
+  return '토끼';
+};
+const getTurtle = async () => {
+  await sleep(3000);
+  return '거북이';
+};
+//await를 사용하면서 연달아 코드가 실행돼 4.5초 걸리는 것을
+//Promise.all을 사용하여 동시에 작업을 시작
+//하지만 등록한 프로미스 중 하나라도 실패하면 모든 게 실패로 간주
+async function process3() {
+  const [dog, rabbit, turtle] = await Promise.all([
+    getDog(),
+    getRabbit(),
+    getTurtle()
+  ]);
+  console.log(dog);
+  console.log(rabbit);
+  console.log(turtle); //배열 비구조화 할당 문법 사용
+}
+
+process3();
+
+//Promise.race: 여러 개의 프로미스를 등록해서 실행했을 때
+//가장 빨리 끝난 것 하나의 결과값을 가져옴
+//다만 가장 먼저 끝난 프로미스가 실패하면 이를 실패로 간주
+async function process4(){
+  const first = await Promise.race([
+    getDog(),
+    getRabbit(),
+    getTurtle(),
+  ]);
+  console.log(first);
+}
