@@ -9,7 +9,9 @@ import React from 'react';
 
 //import MyComponent from './MyComponent';
 //import Counter from './Counter';
-import Say from './Say';
+//import Say from './Say';
+//import EventPractice from './EventPractice';
+import EventPractice2 from './EventPractice2';
 
 //함수형 컨포넌트
 //function App() {
@@ -81,8 +83,16 @@ import Say from './Say';
 //   return <Counter />;
 // };
 
+// const App = () => {
+//   return <Say />;
+// };
+
+// const App = () => {
+//   return <EventPractice />;
+// };
+
 const App = () => {
-  return <Say />;
+  return <EventPractice2 />;
 };
 
 export default App;
