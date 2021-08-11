@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+//import { Component } from 'react/cjs/react.production.min';
 //프로젝트 생성 과정에서 node_modules 디렉터리에 설치된 react 모듈 사용
 //모듈 사용은 원래 브라우저에 없는 기능. 브라우저에서 사용 시 번들러(bundler) 사용
 //번들러 도구를 사용하면 불러온(import 혹은 require로) 모듈을 모두 합쳐 하나의 파일로 생성
@@ -11,7 +12,8 @@ import React from 'react';
 //import Counter from './Counter';
 //import Say from './Say';
 //import EventPractice from './EventPractice';
-import EventPractice2 from './EventPractice2';
+//import EventPractice2 from './EventPractice2';
+import ValidationSample from './ValidationSample';
 
 //함수형 컨포넌트
 //function App() {
@@ -91,9 +93,15 @@ import EventPractice2 from './EventPractice2';
 //   return <EventPractice />;
 // };
 
-const App = () => {
-  return <EventPractice2 />;
-};
+// const App = () => {
+//   return <EventPractice2 />;
+// };
+
+class App extends Component {
+  render() {
+    return <ValidationSample />;
+  }
+}
 
 export default App;
 //App 컴포넌트는 MyComponent 컴포넌트의 부모 컴포넌트
