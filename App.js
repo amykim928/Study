@@ -15,7 +15,9 @@ import React, { Component } from 'react';
 //import EventPractice2 from './EventPractice2';
 //import ValidationSample from './ValidationSample';
 //import ScrollBox from './ScrollBox';
-import IterationSample from './IterationSample';
+//import IterationSample from './IterationSample';
+import LifeCycleSample from './LifeCycleSample';
+import ErrorBoundary from './ErrorBoundary';
 
 //함수형 컨포넌트
 //function App() {
@@ -123,9 +125,36 @@ import IterationSample from './IterationSample';
 //버튼을 누를 때 (이미 한 번 렌더링을 해서 this.scrollBox를 설정한 시점)
 //this.scrollBox.scrollBotton 값을 읽어 와서 실행하므로 오류가 발생하지 않음
 
+// class App extends Component {
+//   render() {
+//     return <IterationSample />;
+//   }
+// }
+
+function getRandomColor() {
+  return '#' + Math.floor(Math.random() * 16777215).toString(16);
+} //state의 color 값을 랜덤 색상으로 설정
+
 class App extends Component {
+  state = {
+    color: '#000000',
+  };
+
+  handleClick = () => {
+    this.setState({
+      color: getRandomColor(),
+    });
+  };
+
   render() {
-    return <IterationSample />;
+    return (
+      <div>
+        <button onClick={this.handleClick}>랜덤 색상</button>
+        <ErrorBoundary>
+          <LifeCycleSample color={this.state.color} />
+        </ErrorBoundary>
+      </div>
+    );
   }
 }
 
