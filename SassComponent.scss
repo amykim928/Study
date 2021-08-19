@@ -1,0 +1,67 @@
+//변수 사용하기
+//$red: #fa5252;
+//$orange: #fd7e14;
+//$yellow: #fcc419;
+//$green: #40c057;
+//$blue: #339af0;
+//$indigo: #5c7cfa;
+//$violet: #7950f2;
+
+//믹스인 만들기(재사용되는 스타일 블록을 함수처럼 사용)
+//@mixin square($size) {
+//  $calculated: 32px * $size;
+//  width: $calculated;
+//  height: $calculated;
+//}
+
+//@import "./styles/utils"; //util 함수 분리
+@import "utils.scss";
+
+.SassComponent {
+  display: flex;
+  background: $oc-gray-2;
+  @include media("<768px") {
+    background: $oc-gray-9;
+  }
+  //SassComponent의 배경색을 open-colors 팔레트 라이브러리에서 불러온 후 설정하고,
+  //화면 가로 크기가 768px 미만이 되면 배경색을 어둡게 바꿔줌
+  .box {
+    //일반 CSS에서는 .SassComponent .box와 마찬가지
+    background: red;
+    cursor: pointer;
+    transition: all 0.3s ease-in;
+    &.red {
+      //.red 클래스가 .box와 함께 사용되었을 때
+      background: $red;
+      @include square(1);
+    }
+    &.orange {
+      background: $orange;
+      @include square(2);
+    }
+    &.yellow {
+      background: $yellow;
+      @include square(3);
+    }
+    &.green {
+      background: $green;
+      @include square(4);
+    }
+    &.blue {
+      background: $blue;
+      @include square(5);
+    }
+    &.indigo {
+      background: $indigo;
+      @include square(6);
+    }
+    &.violet {
+      background: $violet;
+      @include square(7);
+    }
+    &:hover {
+      //.box에 마우스를 올렸을 때
+      background: black;
+    }
+  }
+}
