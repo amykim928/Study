@@ -1,0 +1,21 @@
+.TodoTemplate {
+  width: 512px;
+  //width가 주어진 상태에서 좌우 중앙 정렬
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 6rem; //위 여백
+  border-radius: 4px; //테두리 둥글게
+  overflow: hidden; //요소가 영역을 벗어날 때
+  .app-title {
+    background: #22b8cf;
+    color: white;
+    height: 4rem;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center; //수직 방향 정렬
+    justify-content: center; //수평 방향 정렬
+  }
+  .content {
+    background: white;
+  }
+}

@@ -18,7 +18,7 @@ const media = Object.keys(sizes).reduce((acc, label) => {
 
 const Box = styled.div`
   /*props로 넣어준 값을 직접 전달해줄 수 있음*/
-  background: ${(props) => props.color || "blue"};
+  background: ${(props) => props.color || "blue"}; //blue는 기본 색상
   padding: 1rem;
   display: flex;
   width: 1024px;
@@ -33,6 +33,12 @@ const Box = styled.div`
   ${media.tablet`width: 100%;`};
 `;
 //Tagged 템플릿 리터럴: `을 사용하여 만든 문자열
+//템플릿 사이사이에 들어가는 자바스크립트 객체나 함수의 원본 값을 그대로 추출
+//styled.div 뒤에 Tagged 템플릿 리터럴 문법을 통해 스타일을 넣어주면,
+//해당 스타일이 적용된 div로 이루어진 리액트 컴포넌트가 생성됨
+//사용해야 할 태그명이 유동적이거나 특정 컴포넌트 자체에 스타일링을 해주고 싶으면
+//const MyInput = styled('input')`background:gray;` 처럼 태그의 타입을 styled 함수의 인자로 전달하거나,
+//const StyledLink = styled(Link)`color: blue; `처럼 아예 컴포넌트 형식의 값을 넣어줌
 
 const Button = styled.button`
   background: white;
@@ -65,11 +71,12 @@ const Button = styled.button`
     `};
   & + button {
     margin-left: 1rem;
-  }
+  } /*inverted 값이 true일 때 특정 스타일을 부여 */
 `;
 
 const StyledComponent = () => {
   return (
+    //color 값을 props로 넣음
     <Box color="black">
       <Button>안녕하세요</Button>
       <Button inverted={true}>테두리만</Button>
