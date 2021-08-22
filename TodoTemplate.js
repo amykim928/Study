@@ -1,3 +1,5 @@
+//화면을 가운데에 정렬시켜 주며, 앱 타이틀(일정 관리)를 보여주는 컴포넌트
+//children으로 내부 JSX를 props로 받아와 렌더링
 import React from 'react';
 import './TodoTemplate.scss';
 
